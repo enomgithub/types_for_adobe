@@ -760,946 +760,249 @@ type BitmapConversionType* {.pure.} = enum
 
 
 type BitmapHalfToneType* {.pure.} = enum
-  /**
-   * Cross.
-   */
-  CROSS = 6,
-
-  /**
-   * Diamond.
-   */
-  DIAMOND = 2,
-
-  /**
-   * Ellipse.
-   */
-  ELLIPSE = 3,
-
-  /**
-   * Line.
-   */
-  LINE = 4,
-
-  /**
-   * Round.
-   */
-  ROUND = 1,
-
-  /**
-   * Square.
-   */
-  SQUARE = 5,
-}
-
-/**
- * The color to use for matting.
- */
-type MatteType {
-  /**
-   * The current background color.
-   */
-  BACKGROUND = 3,
-
-  /**
-   * Black.
-   */
-  BLACK = 5,
-
-  /**
-   * The current foreground color.
-   */
-  FOREGROUND = 2,
-
-  /**
-   * Gray.
-   */
-  NETSCAPE = 7,
-
-  /**
-   * None.
-   */
-  NONE = 1,
-
-  /**
-   * 50% gray.
-   */
-  SEMIGRAY = 6,
-
-  /**
-   * White.
-   */
-  WHITE = 4,
-}
-
-/**
- * Method to use for interpreting selective color adjustment specifications.
- */
-type AdjustmentReference {
-  /**
-   * A percentage of the whole.
-   */
-  ABSOLUTE = 2,
-
-  /**
-   * A percentage of the existing color amount.
-   */
-  RELATIVE = 1,
-}
-
-/**
- * The color profile to use.
- */
-type OpenDocumentMode {
-  /**
-   * CMYK.
-   */
-  CMYK = 3,
-
-  /**
-   * Grayscale.
-   */
-  GRAYSCALE = 1,
-
-  /**
-   * Lab.
-   */
-  LAB = 4,
-
-  /**
-   * RGB.
-   */
-  RGB = 2,
-}
-
-/**
- * The color profile to use.
- */
-type NewDocumentMode {
-  /**
-   * Bitmap.
-   */
-  BITMAP = 5,
-
-  /**
-   * CMYK.
-   */
-  CMYK = 3,
-
-  /**
-   * Grayscale.
-   */
-  GRAYSCALE = 1,
-
-  /**
-   * Lab.
-   */
-  LAB = 4,
-
-  /**
-   * RGB.
-   */
-  RGB = 2,
-}
-
-/**
- * Deprecated.
- */
-type PhotoCDColorSpace {
-  /**
-   * Lab with 16 bits per channel.
-   */
-  LAB16 = 4,
-
-  /**
-   * Lab with 8 bits per channel.
-   */
-  LAB8 = 3,
-
-  /**
-   * RGB with 16 bits per channel.
-   */
-  RGB16 = 2,
-
-  /**
-   * RGB with 8 bits per channel.
-   */
-  RGB8 = 1,
-}
-
-/**
- * The placement of path or selection boundary strokes.
- */
-type StrokeLocation {
-  /**
-   * The border is placed in the center of the the selection or layer boundaries.
-   */
-  CENTER = 2,
-
-  /**
-   * The border is placed inside the selection or layer boundaries.
-   */
-  INSIDE = 1,
-
-  /**
-   * The border is placed outside the selection or layer boundaries.
-   */
-  OUTSIDE = 3,
-}
-
-/**
- * Color models.
- */
-type ColorModel {
-  /**
-   * CMYK.
-   */
-  CMYK = 3,
-
-  /**
-   * Grayscale.
-   */
-  GRAYSCALE = 1,
-
-  /**
-   * HSB.
-   */
-  HSB = 5,
-
-  /**
-   * Lab.
-   */
-  LAB = 4,
-
-  /**
-   * The color model has not yet been assigned.
-   */
-  NONE = 50,
-
-  /**
-   * RGB.
-   */
-  RGB = 2,
-}
-
-/**
- * When should a JavaScript debugger be shown.
- */
-type JavaScriptExecutionMode {
-  /**
-   * Show the JavaScript debugger when the first line of the JavaScript executes.
-   */
-  BEFORERUNNING = 3,
-
-  /**
-   * Never show the JavaScript debugger. Treat runtime errors by throwing a JavaScript exceptions.
-   */
-  NEVER = 1,
-
-  /**
-   * Show the JavaScript debugger if a runtime error occurs.
-   */
-  ONRUNTIMEERROR = 2,
-}
-
-/**
- * The color space for the source when printing.
- */
-type SourceSpaceType {
-  /**
-   * The document color space.
-   */
-  DOCUMENT = 1,
-
-  /**
-   * The proof color space.
-   */
-  PROOF = 2,
-}
-
-/**
- * The types of art layers.
- */
-type LayerKind {
-  /**
-   * Black and white layer.
-   */
-  BLACKANDWHITE = 22,
-
-  /**
-   * Brightness contrast adjustment layer.
-   */
-  BRIGHTNESSCONTRAST = 9,
-
-  /**
-   * Channel mixer adjustment layer.
-   */
-  CHANNELMIXER = 12,
-
-  /**
-   * Color balance adjustment layer.
-   */
-  COLORBALANCE = 8,
-
-  /**
-   * Color lookup layer.
-   */
-  COLORLOOKUP = 24,
-
-  /**
-   * Curves adjustment layer.
-   */
-  CURVES = 7,
-
-  /**
-   * Exposure layer.
-   */
-  EXPOSURE = 19,
-
-  /**
-   * Gradient fill.
-   */
-  GRADIENTFILL = 4,
-
-  /**
-   * Gradient map adjustment laye.
-   */
-  GRADIENTMAP = 13,
-
-  /**
-   * Hue saturation adjustment laye.
-   */
-  HUESATURATION = 10,
-
-  /**
-   * Invert adjustment layer.
-   */
-  INVERSION = 14,
-
-  /**
-   * 3D layer.
-   */
-  LAYER3D = 20,
-
-  /**
-   * Levels adjustment layer.
-   */
-  LEVELS = 6,
-
-  /**
-   * Normal.
-   */
-  NORMAL = 1,
-
-  /**
-   * Pattern fill.
-   */
-  PATTERNFILL = 5,
-
-  /**
-   * Photo filter layer.
-   */
-  PHOTOFILTER = 18,
-
-  /**
-   * Posterize adjustment layer.
-   */
-  POSTERIZE = 16,
-
-  /**
-   * Selective color adjustment layer.
-   */
-  SELECTIVECOLOR = 11,
-
-  /**
-   * Smart object layer.
-   */
-  SMARTOBJECT = 17,
-
-  /**
-   * Solid color.
-   */
-  SOLIDFILL = 3,
-
-  /**
-   * Text.
-   */
-  TEXT = 2,
-
-  /**
-   * Threshold adjustment layer.
-   */
-  THRESHOLD = 15,
-
-  /**
-   * Vibrance layer.
-   */
-  VIBRANCE = 23,
-
-  /**
-   * Video layer.
-   */
-  VIDEO = 21,
-}
-
-/**
- * PDF presentation transition types.
- */
-type TransitionType {
-  /**
-   * Images transition in horizontal stripes like Venetian blinds.
-   */
-  BLINDSHORIZONTAL = 1,
-
-  /**
-   * Images transition in vertical stripes.
-   */
-  BLINDSVERTICAL = 2,
-
-  /**
-   * Images transition using a shrinking box shape.
-   */
-  BOXIN = 4,
-
-  /**
-   * Images transition using an expanding box shape.
-   */
-  BOXOUT = 5,
-
-  /**
-   * One image dissolves into the next.
-   */
-  DISSOLVE = 3,
-
-  /**
-   * Images dissolve top to bottom.
-   */
-  GLITTERDOWN = 6,
-
-  /**
-   * Images dissolve left to right.
-   */
-  GLITTERRIGHT = 7,
-
-  /**
-   * Images dissolve top-left to bottom-right.
-   */
-  GLITTERRIGHTDOWN = 8,
-
-  /**
-   * Images change with no visible transition.
-   */
-  NONE = 9,
-
-  /**
-   * Images transition using random effects.
-   */
-  RANDOM = 10,
-
-  /**
-   * The new images roll in from the top and bottom of the screen.
-   */
-  SPLITHORIZONTALIN = 11,
-
-  /**
-   * The new image spreads from the middle of the screen to the top and bottom of the screen.
-   */
-  SPLITHORIZONTALOUT = 12,
-
-  /**
-   * The new image rolls in from the left and right edges of the screen.
-   */
-  SPLITVERTICALIN = 13,
-
-  /**
-   * The new image rolls out from the middle of the screen to the left and right edges of the screen.
-   */
-  SPLITVERTICALOUT = 14,
-
-  /**
-   * The new image rolls in from the top of the screen.
-   */
-  WIPEDOWN = 15,
-
-  /**
-   * The new image rolls in from the right side of the screen.
-   */
-  WIPELEFT = 16,
-
-  /**
-   * The new image rolls in from the left side of the screen.
-   */
-  WIPERIGHT = 17,
-
-  /**
-   * The new image rolls in from the bottom of the screen.
-   */
-  WIPEUP = 18,
-}
-
-/**
- * Fonts for web photo gallery text.
- */
-type GalleryFontType {
-  /**
-   * Arial font.
-   */
-  ARIAL = 1,
-
-  /**
-   * Courier New font.
-   */
-  COURIERNEW = 2,
-
-  /**
-   * Helvetica font.
-   */
-  HELVETICA = 3,
-
-  /**
-   * Times New Roman font.
-   */
-  TIMESNEWROMAN = 4,
-}
-
-/**
- * DEPRECATED. Constrain values for images.
- */
-type GalleryConstrainType {
-  /**
-   * Constrain both the height and the width of the image.
-   */
-  CONSTRAINBOTH = 3,
-
-  /**
-   * Constrain the height of the image.
-   */
-  CONSTRAINHEIGHT = 2,
-
-  /**
-   * Constrain width.
-   */
-  CONSTRAINWIDTH = 1,
-}
-
-/**
- * DEPRECATED. Web photo gallery thumb size types.
- */
-type GalleryThumbSizeType {
-  /**
-   * Custom thumbnail.
-   */
-  CUSTOM = 4,
-
-  /**
-   * Large thumbnail.
-   */
-  LARGE = 3,
-
-  /**
-   * Medium thumbnail.
-   */
-  MEDIUM = 2,
-
-  /**
-   * Small thumbnail.
-   */
-  SMALL = 1,
-}
-
-/**
- * DEPRECATED. Web photo gallery security types.
- */
-type GallerySecurityType {
-  /**
-   * Caption security.
-   */
-  CAPTION = 5,
-
-  /**
-   * Copyright security.
-   */
-  COPYRIGHT = 4,
-
-  /**
-   * Credit security.
-   */
-  CREDIT = 6,
-
-  /**
-   * Custom text security.
-   */
-  CUSTOMTEXT = 2,
-
-  /**
-   * Filename security.
-   */
-  FILENAME = 3,
-
-  /**
-   * No security.
-   */
-  NONE = 1,
-
-  /**
-   * Title security.
-   */
-  TITLE = 7,
-}
-
-/**
- * The function or meaning of text in a Picture Package.
- */
-type PicturePackageTextType {
-  /**
-   * The text is a caption.
-   */
-  CAPTION = 5,
-
-  /**
-   * The text is the copyright.
-   */
-  COPYRIGHT = 4,
-
-  /**
-   * The text is the credit.
-   */
-  CREDIT = 6,
-
-  /**
-   * The text is the filename.
-   */
-  FILENAME = 3,
-
-  /**
-   * No text.
-   */
-  NONE = 1,
-
-  /**
-   * The text is the origin.
-   */
-  ORIGIN = 7,
-
-  /**
-   * The text is user defined.
-   */
-  USER = 2,
-}
-
-/**
- * The color to use for text displayed over gallery images as an antitheft deterrent.
- */
-type GallerySecurityTextColorType {
-  /**
-   * Black text.
-   */
-  BLACK = 1,
-
-  /**
-   * Custom color.
-   */
-  CUSTOM = 3,
-
-  /**
-   * White text.
-   */
-  WHITE = 2,
-}
-
-/**
- * The position of the text displayed over gallery images as an antitheft deterrent.
- */
-type GallerySecurityTextPositionType {
-  /**
-   * Text is centered on each image.
-   */
-  CENTERED = 1,
-
-  /**
-   * Ltext is in the lower left corner of each image.
-   */
-  LOWERLEFT = 3,
-
-  /**
-   * Text is in the lower right corner of each image.
-   */
-  LOWERRIGHT = 5,
-
-  /**
-   * Text is in the upper left corner of each image.
-   */
-  UPPERLEFT = 2,
-
-  /**
-   * Text is in the upper right corner of each image.
-   */
-  UPPERRIGHT = 4,
-}
-
-/**
- * DEPRECATED. web photo gallery security text rotation types.
- */
-type GallerySecurityTextRotateType {
-  /**
-   * Rotate 45 degrees clock wise.
-   */
-  CLOCKWISE45 = 2,
-
-  /**
-   * Rotate 90 degrees clock wise.
-   */
-  CLOCKWISE90 = 3,
-
-  /**
-   * Rotate 45 degrees counter clock wise.
-   */
-  COUNTERCLOCKWISE45 = 4,
-
-  /**
-   * Rotate 90 degrees counter clock wise.
-   */
-  COUNTERCLOCKWISE90 = 5,
-
-  /**
-   * No rotate.
-   */
-  ZERO = 1,
-}
-
-/**
- * The permission state for queries.
- */
-type QueryStateType {
-  /**
-   * Always maximize compatibility.
-   */
-  ALWAYS = 1,
-
-  /**
-   * Always ask about maximize compatibility.
-   */
-  ASK = 2,
-
-  /**
-   * Never ask about maximize compatibility.
-   */
-  NEVER = 3,
-}
-
-/**
- * The location of history log data.
- */
-type SaveLogItemsType {
-  /**
-   * Save history log in a text file.
-   */
-  LOGFILE = 2,
-
-  /**
-   * Save history log in file metadata and a text file.
-   */
-  LOGFILEANDMETADATA = 3,
-
-  /**
-   * Save history log in file metadata.
-   */
-  METADATA = 1,
-}
-
-/**
- * The history log edit options.
- */
-type EditLogItemsType {
-  /**
-   * Save a concise history log.
-   */
-  CONCISE = 2,
-
-  /**
-   * Save a detailed history log.
-   */
-  DETAILED = 3,
-
-  /**
-   * Save a history for only for the session.
-   */
-  SESSIONONLY = 1,
-}
-
-/**
- * The type of path.
- */
-type PathKind {
-  /**
-   * Clipping path.
-   */
-  CLIPPINGPATH = 2,
-
-  /**
-   * Normal path.
-   */
-  NORMALPATH = 1,
-
-  /**
-   * Text mask path.
-   */
-  TEXTMASK = 5,
-
-  /**
-   * Vector mask path.
-   */
-  VECTORMASK = 4,
-
-  /**
-   * Workpath.
-   */
-  WORKPATH = 3,
-}
-
-/**
- * Specifies how to combine the shapes if the destination image already has a selection.
- */
-type ShapeOperation {
-  /**
-   * Adds the shapes.
-   */
-  SHAPEADD = 1,
-
-  /**
-   * The resulting shape is the area of intersection between the two shapes.
-   */
-  SHAPEINTERSECT = 3,
-
-  /**
-   * Subtracts the loaded shape from the selection is the destination image.
-   */
-  SHAPESUBTRACT = 4,
-
-  /**
-   * Replaces the shape in the destination image with the loaded selection.
-   */
-  SHAPEXOR = 2,
-}
-
-/**
- * The path point kind.
- */
-type PointKind {
-  /**
-   * The point must be a corner.
-   */
-  CORNERPOINT = 2,
-
-  /**
-   * The point can be a curve.
-   */
-  SMOOTHPOINT = 1,
-}
-
-/**
- * Tools for the stroke path command.
- */
-type ToolType {
-  /**
-   * Art history brush.
-   */
-  ARTHISTORYBRUSH = 9,
-
-  /**
-   * Background eraser.
-   */
-  BACKGROUNDERASER = 4,
-
-  /**
-   * Blur.
-   */
-  BLUR = 11,
-
-  /**
-   * Brush.
-   */
-  BRUSH = 2,
-
-  /**
-   * Burn.
-   */
-  BURN = 14,
-
-  /**
-   * Clone stamp.
-   */
-  CLONESTAMP = 5,
-
-  /**
-   * Color replacement tool.
-   */
-  COLORREPLACEMENTTOOL = 16,
-
-  /**
-   * Dodge.
-   */
-  DODGE = 13,
-
-  /**
-   * Eraser.
-   */
-  ERASER = 3,
-
-  /**
-   * Healing brush.
-   */
-  HEALINGBRUSH = 7,
-
-  /**
-   * History brush.
-   */
-  HISTORYBRUSH = 8,
-
-  /**
-   * Pattern stamp.
-   */
-  PATTERNSTAMP = 6,
-
-  /**
-   * Pencil.
-   */
-  PENCIL = 1,
-
-  /**
-   * Sharpen.
-   */
-  SHARPEN = 12,
-
-  /**
-   * Smudge.
-   */
-  SMUDGE = 10,
-
-  /**
-   * Sponge.
-   */
-  SPONGE = 15,
-}
-
-/**
- * The destination, if any, for batch-processed files.
- */
-type BatchDestinationType {
-  /**
-   * Outputs files to a folder.
-   */
-  FOLDER = 3,
-
-  /**
-   * Leaves all files open.
-   */
-  NODESTINATION = 1,
-
-  /**
-   * Saves changes and closes all files.
-   */
-  SAVEANDCLOSE = 2,
-}
+  ROUND = 1
+  DIAMOND = 2
+  ELLIPSE = 3
+  LINE = 4
+  SQUARE = 5
+  CROSS = 6
+
+
+type MatteType* {.pure.} = enum
+  NONE = 1
+  FOREGROUND = 2
+  BACKGROUND = 3
+  WHITE = 4
+  BLACK = 5
+  SEMIGRAY = 6
+  NETSCAPE = 7
+
+
+type AdjustmentReference* {.pure.} = enum
+  RELATIVE = 1
+  ABSOLUTE = 2
+
+
+type OpenDocumentMode* {.pure.} = enum
+  GRAYSCALE = 1
+  RGB = 2
+  CMYK = 3
+  LAB = 4
+
+
+type NewDocumentMode* {.pure.} = enum
+  GRAYSCALE = 1
+  RGB = 2
+  CMYK = 3
+  LAB = 4
+  BITMAP = 5
+
+
+type PhotoCDColorSpace* {.pure.} = enum
+  RGB8 = 1
+  RGB16 = 2
+  LAB8 = 3
+  LAB16 = 4
+
+
+type StrokeLocation* {.pure.} = enum
+  INSIDE = 1
+  CENTER = 2
+  OUTSIDE = 3
+
+
+type ColorModel* {.pure.} = enum
+  GRAYSCALE = 1
+  RGB = 2
+  CMYK = 3
+  LAB = 4
+  HSB = 5
+  NONE = 50
+
+
+type JavaScriptExecutionMode* {.pure.} = enum
+  NEVER = 1
+  ONRUNTIMEERROR = 2
+  BEFORERUNNING = 3
+
+
+type SourceSpaceType* {.pure.} = enum 
+  DOCUMENT = 1
+  PROOF = 2
+
+
+type LayerKind* {.pure.} = enum 
+  NORMAL = 1
+  TEXT = 2
+  SOLIDFILL = 3
+  GRADIENTFILL = 4
+  PATTERNFILL = 5
+  LEVELS = 6
+  CURVES = 7
+  COLORBALANCE = 8
+  BRIGHTNESSCONTRAST = 9
+  HUESATURATION = 10
+  SELECTIVECOLOR = 11
+  CHANNELMIXER = 12
+  GRADIENTMAP = 13
+  INVERSION = 14
+  THRESHOLD = 15
+  POSTERIZE = 16
+  SMARTOBJECT = 17
+  PHOTOFILTER = 18
+  EXPOSURE = 19
+  LAYER3D = 20
+  VIDEO = 21
+  BLACKANDWHITE = 22
+  VIBRANCE = 23
+  COLORLOOKUP = 24
+
+
+type TransitionType* {.pure.} = enum
+  BLINDSHORIZONTAL = 1
+  BLINDSVERTICAL = 2
+  DISSOLVE = 3
+  BOXIN = 4
+  BOXOUT = 5
+  GLITTERDOWN = 6
+  GLITTERRIGHT = 7
+  GLITTERRIGHTDOWN = 8
+  NONE = 9
+  RANDOM = 10
+  SPLITHORIZONTALIN = 11
+  SPLITHORIZONTALOUT = 12
+  SPLITVERTICALIN = 13
+  SPLITVERTICALOUT = 14
+  WIPEDOWN = 15
+  WIPELEFT = 16
+  WIPERIGHT = 17
+  WIPEUP = 18
+
+
+type GalleryFontType* {.pure.} = enum
+  ARIAL = 1
+  COURIERNEW = 2
+  HELVETICA = 3
+  TIMESNEWROMAN = 4
+
+
+type GalleryConstrainType* {.pure.} = enum 
+  CONSTRAINWIDTH = 1
+  CONSTRAINHEIGHT = 2
+  CONSTRAINBOTH = 3
+
+
+type GalleryThumbSizeType* {.pure.} = enum 
+  SMALL = 1
+  MEDIUM = 2
+  LARGE = 3
+  CUSTOM = 4
+
+
+type GallerySecurityType* {.pure.} = enum
+  NONE = 1
+  CUSTOMTEXT = 2
+  FILENAME = 3
+  COPYRIGHT = 4
+  CAPTION = 5
+  CREDIT = 6
+  TITLE = 7
+
+
+type PicturePackageTextType* {.pure.} = enum
+  NONE = 1
+  USER = 2
+  FILENAME = 3
+  COPYRIGHT = 4
+  CAPTION = 5
+  CREDIT = 6
+  ORIGIN = 7
+
+
+type GallerySecurityTextColorType* {.pure.} = enum
+  BLACK = 1
+  WHITE = 2
+  CUSTOM = 3
+
+
+type GallerySecurityTextPositionType* {.pure.} = enum
+  CENTERED = 1
+  UPPERLEFT = 2
+  LOWERLEFT = 3
+  UPPERRIGHT = 4
+  LOWERRIGHT = 5
+
+
+type GallerySecurityTextRotateType* {.pure.} = enum
+  ZERO = 1
+  CLOCKWISE45 = 2
+  CLOCKWISE90 = 3
+  COUNTERCLOCKWISE45 = 4
+  COUNTERCLOCKWISE90 = 5
+
+
+type QueryStateType* {.pure.} = enum
+  ALWAYS = 1
+  ASK = 2
+  NEVER = 3
+
+
+type SaveLogItemsType* {.pure.} = enum 
+  METADATA = 1
+  LOGFILE = 2
+  LOGFILEANDMETADATA = 3
+
+
+type EditLogItemsType* {.pure.} = enum
+  SESSIONONLY = 1
+  CONCISE = 2
+  DETAILED = 3
+
+
+type PathKind* {.pure.} = enum
+  NORMALPATH = 1
+  CLIPPINGPATH = 2
+  WORKPATH = 3
+  VECTORMASK = 4
+  TEXTMASK = 5
+
+
+type ShapeOperation* {.pure.} = enum
+  SHAPEADD = 1
+  SHAPEXOR = 2
+  SHAPEINTERSECT = 3
+  SHAPESUBTRACT = 4
+
+
+type PointKind* {.pure.} = enum
+  SMOOTHPOINT = 1
+  CORNERPOINT = 2
+
+
+type ToolType* {.pure.} = enum
+  PENCIL = 1
+  BRUSH = 2
+  ERASER = 3
+  BACKGROUNDERASER = 4
+  CLONESTAMP = 5
+  PATTERNSTAMP = 6
+  HEALINGBRUSH = 7
+  HISTORYBRUSH = 8
+  ARTHISTORYBRUSH = 9
+  SMUDGE = 10
+  BLUR = 11
+  SHARPEN = 12
+  DODGE = 13
+  BURN = 14
+  SPONGE = 15
+  COLORREPLACEMENTTOOL = 16
+
+
+type BatchDestinationType* {.pure.} = enum
+  NODESTINATION = 1
+  SAVEANDCLOSE = 2
+  FOLDER = 3
+
 
 /**
  * File naming options for the batch command.
