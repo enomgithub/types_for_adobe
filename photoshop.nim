@@ -288,482 +288,134 @@ type Extension* {.pure.} = enum
   UPPERCASE = 3
 
 
-/**
- * The encoding to use when saving to TIFF format.
- */
-type TIFFEncoding {
-  /**
-   * JPEG compression, which is lossy and recommended for continuous-tone images, such as photographs.
-   */
-  JPEG = 3,
-
-  /**
-   * No compression.
-   */
-  NONE = 1,
-
-  /**
-   * LZW compression, which is lossless and most useful for images with large areas of single color.
-   */
-  TIFFLZW = 2,
-
-  /**
-   * Zip compression, which is lossless and most effective for images that contain large areas of single color.
-   */
-  TIFFZIP = 4,
-}
-
-/**
- * The layer compression type.
- */
-type LayerCompression {
-  /**
-   * Run Length Encoding, which is lossless.
-   */
-  RLE = 1,
-
-  /**
-   * Zip compression, which is lossless and most effective for images that contain large areas of single color.
-   */
-  ZIP = 2,
-}
-
-/**
- * The platform-specific order in which bytes will be read.
- */
-type ByteOrder {
-  /**
-   * IBM PC.
-   */
-  IBM = 1,
-
-  /**
-   * Mac OS.
-   */
-  MACOS = 2,
-}
-
-/**
- * The DCS format.
- */
-type DCSType {
-  /**
-   * Creates a color composite file in addition to DCS files.
-   */
-  COLORCOMPOSITE = 3,
-
-  /**
-   * Creates a grayscale composite file in addition to DCS files.
-   */
-  GRAYSCALECOMPOSITE = 2,
-
-  /**
-   * Does not create a composite file.
-   */
-  NOCOMPOSITE = 1,
-}
-
-/**
- * The type of pixels to trim around an image.
- */
-type TrimType {
-  /**
-   * Removes from the image an area the color of the lower right pixel.
-   */
-  BOTTOMRIGHT = 9,
-
-  /**
-   * Removes from the image an area the color of the upper left pixel.
-   */
-  TOPLEFT = 1,
-
-  /**
-   * Trims away transparency at the edges of the image, leaving the smallest image containing nontransparent pixels.
-   */
-  TRANSPARENT = 0,
-}
-
-/**
- * The color picker to use.
- */
-type ColorPicker {
-  /**
-   * The Adobe Color Picker.
-   */
-  ADOBE = 1,
-
-  /**
-   * The built-in Apple color picker.
-   */
-  APPLE = 2,
-
-  /**
-   * An installed plug-in color picker.
-   */
-  PLUGIN = 4,
-
-  /**
-   * The built-in Windows color picker.
-   */
-  WINDOWS = 3,
-}
-
-/**
- * The type of object(s) to reset to default settings.
- */
-type ResetTarget {
-  /**
-   * Tools.
-   */
-  ALLTOOLS = 2,
-
-  /**
-   * Warning dialogs.
-   */
-  ALLWARNINGS = 1,
-
-  /**
-   * All targets.
-   */
-  EVERYTHING = 3,
-}
-
-/**
- * The application's behavior regarding image previews and file extensions when a save method is called.
- */
-type SaveBehavior {
-  /**
-   * Always save the item with the file.
-   */
-  ALWAYSSAVE = 2,
-
-  /**
-   * Prompt the user whether to save the item with the file.
-   */
-  ASKWHENSAVING = 3,
-
-  /**
-   * Never save the item with the file.
-   */
-  NEVERSAVE = 1,
-}
-
-/**
- * The pointer for the following tools: Marquee, Lasso, Polygonal Lasso, Magic Wand, Crop, Slice, Patch Eyedropper, Pen, Gradient, Line, Paint Bucket, Magnetic Lasso, Magnetic Pen, Freeform Pen, Measure, and Color Sampler.
- */
-type PaintingCursors {
-  /**
-   * Displays cursors as brush shapes representing the size of the current brush. Valid only for painting cursors.
-   * Brush size cursors may not appear for very large brushes.
-   */
-  BRUSHSIZE = 3,
-
-  /**
-   * Displays pointers as cross hairs.
-   */
-  PRECISE = 2,
-
-  /**
-   * Displays pointers as tool icons.
-   */
-  STANDARD = 1,
-}
-
-/**
- * The pointer for the following tools: Eraser, Pencil, Paintbrush, Healing Brush, Rubber Stamp, Pattern Stamp, Smudge, Blur, Sharpen, Dodge, Burn, Sponge.
- */
-type OtherPaintingCursors {
-  /**
-   * Displays pointers as cross hairs.
-   */
-  PRECISEOTHER = 2,
-
-  /**
-   * Displays pointers as tool icons.
-   */
-  STANDARDOTHER = 1,
-}
-
-/**
- * The size of grid squares.
- */
-type GridSize {
-  /**
-   * Large grid squares.
-   */
-  LARGE = 4,
-
-  /**
-   * Medium grid squares.
-   */
-  MEDIUM = 3,
-
-  /**
-   * No grid is displayed.
-   */
-  NONE = 1,
-
-  /**
-   * Small grid squares.
-   */
-  SMALL = 2,
-}
-
-/**
- * The measurement unit for ruler increments.
- */
-type Units {
-  /**
-   * Centimeters.
-   */
-  CM = 3,
-
-  /**
-   * Inches.
-   */
-  INCHES = 2,
-
-  /**
-   * Millimeters.
-   */
-  MM = 4,
-
-  /**
-   * Percent.
-   */
-  PERCENT = 7,
-
-  /**
-   * Picas.
-   */
-  PICAS = 6,
-
-  /**
-   * Pixels.
-   */
-  PIXELS = 1,
-
-  /**
-   * Points.
-   */
-  POINTS = 5,
-}
-
-/**
- * The measurement unit for type.
- */
-type TypeUnits {
-  /**
-   * Millimeters.
-   */
-  MM = 4,
-
-  /**
-   * Pixels.
-   */
-  PIXELS = 1,
-
-  /**
-   * Points.
-   */
-  POINTS = 5,
-}
-
-/**
- * The point type.
- */
-type PointType {
-  /**
-   * 72 points per inch.
-   */
-  POSTSCRIPT = 1,
-
-  /**
-   * 72.27 points per inch.
-   */
-  TRADITIONAL = 2,
-}
-
-/**
- * The line style for nonprinting grids displayed over images.
- */
-type GridLineStyle {
-  /**
-   * Dashed.
-   */
-  DASHED = 2,
-
-  /**
-   * Dotted.
-   */
-  DOTTED = 3,
-
-  /**
-   * Solid.
-   */
-  SOLID = 1,
-}
-
-/**
- * The line style for nonprinting guides displayed over images.
- */
-type GuideLineStyle {
-  /**
-   * Dashed.
-   */
-  DASHED = 2,
-
-  /**
-   * Solid.
-   */
-  SOLID = 1,
-}
-
-/**
- * Controls how pixels in the image are blended.
- */
-type BlendMode {
-  /**
-   * Creates a result color with the luminance of the base color and the hue and saturation of the blend color. This preserves the gray levels in the image and is useful for coloring monochrome images and for tinting color images.
-   */
-  COLORBLEND = 22,
-
-  /**
-   * Looks at the color information in each channel and darkens the base color to reflect the blend color by increasing the contrast. Blending with white produces no change.
-   */
-  COLORBURN = 6,
-
-  /**
-   * Looks at the color information in each channel and brightens the base color to reflect the blend color by decreasing the contrast. Blending with black produces no change.
-   */
-  COLORDODGE = 10,
-
-  /**
-   * Looks at the color information in each channel and selects the base or blend color—whichever is darker—as the result color. Pixels lighter than the blend color are replaced, and pixels darker than the blend color do not change.
-   */
-  DARKEN = 4,
-
-  /**
-   * Lighter colors lighten the result, and darker colors darken the result. 50% gray as a blend color has no effect on the result color. Lowering the fill opacity creates less posterization/thresholding.
-   */
-  DARKERCOLOR = 28,
-
-  /**
-   * Looks at the color information in each channel and subtracts either the blend color from the base color or the base color from the blend color, depending on which has the greater brightness value. Blending with white inverts the base color values; blending with black produces no change.
-   */
-  DIFFERENCE = 18,
-
-  /**
-   * Edits or paints each pixel to make it the result color. However, the result color is a random replacement of the pixels with the base color or the blend color, depending on the opacity at any pixel location.
-   */
-  DISSOLVE = 3,
-
-  /**
-   *
-   */
-  DIVIDE = 30,
-
-  /**
-   * Creates an effect similar to but lower in contrast than the Difference mode. Blending with white inverts the base color values. Blending with black produces no change.
-   */
-  EXCLUSION = 19,
-
-  /**
-   * Multiplies or screens the colors, depending on the blend color. The effect is similar to shining a harsh spotlight on the image. If the blend color (light source) is lighter than 50% gray, the image is lightened, as if it were screened. This is useful for adding highlights to an image. If the blend color is darker than 50% gray, the image is darkened, as if it were multiplied. This is useful for adding shadows to an image. Painting with pure black or white results in pure black or white.
-   */
-  HARDLIGHT = 14,
-
-  /**
-   * Lighter colors lighten the result, and darker colors darken the result. 50% gray as a blend color has no effect on the result color. Lowering the fill opacity creates less posterization/thresholding.
-   */
-  HARDMIX = 26,
-
-  /**
-   * Creates a result color with the luminance and saturation of the base color and the hue of the blend color.
-   */
-  HUE = 20,
-
-  /**
-   * Looks at the color information in each channel and selects the base or blend color—whichever is lighter—as the result color. Pixels darker than the blend color are replaced, and pixels lighter than the blend color do not change.
-   */
-  LIGHTEN = 8,
-
-  /**
-   * Lighter colors lighten the result, and darker colors darken the result. 50% gray as a blend color has no effect on the result color. Lowering the fill opacity creates less posterization/thresholding.
-   */
-  LIGHTERCOLOR = 27,
-
-  /**
-   * Looks at the color information in each channel and darkens the base color to reflect the blend color by decreasing the brightness. Blending with white produces no change.
-   */
-  LINEARBURN = 7,
-
-  /**
-   * Looks at the color information in each channel and brightens the base color to reflect the blend color by increasing the brightness. Blending with black produces no change.
-   */
-  LINEARDODGE = 11,
-
-  /**
-   * Burns or dodges the colors by decreasing or increasing the brightness, depending on the blend color. If the blend color (light source) is lighter than 50% gray, the image is lightened by increasing the brightness. If the blend color is darker than 50% gray, the image is darkened by decreasing the brightness.
-   */
-  LINEARLIGHT = 16,
-
-  /**
-   * Creates a result color with the hue and saturation of the base color and the luminance of the blend color. This mode creates an inverse effect from that of the Color mode.
-   */
-  LUMINOSITY = 23,
-
-  /**
-   * Looks at the color information in each channel and multiplies the base color by the blend color. The result color is always a darker color. Multiplying any color with black produces black. Multiplying any color with white leaves the color unchanged. When you’re painting with a color other than black or white, successive strokes with a painting tool produce progressively darker colors. The effect is similar to drawing on the image with multiple marking pens.
-   */
-  MULTIPLY = 5,
-
-  /**
-   * Edits or paints each pixel to make it the result color. (Called "Threshold" when you’re working with a bitmapped or indexed-color image.)
-   */
-  NORMAL = 2,
-
-  /**
-   * Multiplies or screens the colors, depending on the base color. Patterns or colors overlay the existing pixels while preserving the highlights and shadows of the base color. The base color is not replaced but is mixed with the blend color to reflect the lightness or darkness of the original color.
-   */
-  OVERLAY = 12,
-
-  /**
-   * Allows any blend modes, advanced blending options, and opacity and fill values applied to layers within a set to affect layers below the set in the Layers palette.
-   * Valid only for layer sets. To restrict blend modes of the layers within a set, change the layer set's blend mode to Normal.
-   */
-  PASSTHROUGH = 1,
-
-  /**
-   * Replaces the colors, depending on the blend color. If the blend color (light source) is lighter than 50% gray, pixels darker than the blend color are replaced, and pixels lighter than the blend color do not change. If the blend color is darker than 50% gray, pixels lighter than the blend color are replaced, and pixels darker than the blend color do not change. This is useful for adding special effects to an image.
-   */
-  PINLIGHT = 17,
-
-  /**
-   * Creates a result color with the luminance and hue of the base color and the saturation of the blend color. Painting with this mode in an area with no (0) saturation (gray) causes no change.
-   */
-  SATURATION = 21,
-
-  /**
-   * Looks at each channel’s color information and multiplies the inverse of the blend and base colors. The result color is always a lighter color. Screening with black leaves the color unchanged. Screening with white produces white. The effect is similar to projecting multiple photographic slides on top of each other.
-   */
-  SCREEN = 9,
-
-  /**
-   * Darkens or lightens the colors, depending on the blend color. The effect is similar to shining a diffused spotlight on the image. If the blend color (light source) is lighter than 50% gray, the image is lightened as if it were dodged. If the blend color is darker than 50% gray, the image is darkened as if it were burned in. Painting with pure black or white produces a distinctly darker or lighter area but does not result in pure black or white.
-   */
-  SOFTLIGHT = 13,
-
-  /**
-   *
-   */
-  SUBTRACT = 29,
-
-  /**
-   * Burns or dodges the colors by increasing or decreasing the contrast, depending on the blend color. If the blend color (light source) is lighter than 50% gray, the image is lightened by decreasing the contrast. If the blend color is darker than 50% gray, the image is darkened by increasing the contrast.
-   */
-  VIVIDLIGHT = 15,
-}
+type TIFFEncoding* {.pure.} = enum
+  NONE = 1
+  TIFFLZW = 2
+  JPEG = 3
+  TIFFZIP = 4
+
+
+type LayerCompression* {.pure.} = enum
+  RLE = 1
+  ZIP = 2
+
+
+type ByteOrder* {.pure.} = enum
+  IBM = 1
+  MACOS = 2
+
+
+type DCSType* {.pure.} = enum
+  NOCOMPOSITE = 1
+  GRAYSCALECOMPOSITE = 2
+  COLORCOMPOSITE = 3
+
+
+type TrimType* {.pure.} = enum
+  TRANSPARENT = 0
+  TOPLEFT = 1
+  BOTTOMRIGHT = 9
+
+
+type ColorPicker* {.pure.} = enum
+  ADOBE = 1
+  APPLE = 2
+  WINDOWS = 3
+  PLUGIN = 4
+
+
+type ResetTarget* {.pure.} = enum
+  ALLWARNINGS = 1
+  ALLTOOLS = 2
+  EVERYTHING = 3
+
+
+type SaveBehavior* {.pure.} = enum
+  NEVERSAVE = 1
+  ALWAYSSAVE = 2
+  ASKWHENSAVING = 3
+
+
+type PaintingCursors* {.pure.} = enum
+  STANDARD = 1
+  PRECISE = 2
+  BRUSHSIZE = 3
+
+
+type OtherPaintingCursors* {.pure.} = enum
+  STANDARDOTHER = 1
+  PRECISEOTHER = 2
+
+
+type GridSize* {.pure.} = enum
+  NONE = 1
+  SMALL = 2
+  MEDIUM = 3
+  LARGE = 4
+
+
+type Units* {.pure.} = enum
+  PIXELS = 1
+  INCHES = 2
+  CM = 3
+  MM = 4
+  POINTS = 5
+  PICAS = 6
+  PERCENT = 7
+
+
+type TypeUnits* {.pure.} = enum
+  PIXELS = 1
+  MM = 4
+  POINTS = 5
+
+
+type PointType* {.pure.} = enum
+  POSTSCRIPT = 1
+  TRADITIONAL = 2
+
+
+type GridLineStyle* {.pure.} = enum
+  SOLID = 1
+  DASHED = 2
+  DOTTED = 3
+
+
+type GuideLineStyle* {.pure.} = enum
+  SOLID = 1
+  DASHED = 2
+
+
+type BlendMode* {.pure.} = enum
+  PASSTHROUGH = 1
+  NORMAL = 2
+  DISSOLVE = 3
+  DARKEN = 4
+  MULTIPLY = 5
+  COLORBURN = 6
+  LINEARBURN = 7
+  LIGHTEN = 8
+  SCREEN = 9
+  COLORDODGE = 10
+  LINEARDODGE = 11
+  OVERLAY = 12
+  SOFTLIGHT = 13
+  HARDLIGHT = 14
+  VIVIDLIGHT = 15
+  LINEARLIGHT = 16
+  PINLIGHT = 17
+  DIFFERENCE = 18
+  EXCLUSION = 19
+  HUE = 20
+  SATURATION = 21
+  COLORBLEND = 22
+  LUMINOSITY = 23
+  HARDMIX = 26
+  LIGHTERCOLOR = 27
+  DARKERCOLOR = 28
+  SUBTRACT = 29
+  DIVIDE = 30
+
 
 /**
  * The color blend mode type.
