@@ -1,0 +1,1 @@
+respect for [Types-for-Adobe](https://github.com/bbb999/Types-for-Adobe)
