@@ -417,1305 +417,349 @@ type BlendMode* {.pure.} = enum
   DIVIDE = 30
 
 
-/**
- * The color blend mode type.
- */
-type ColorBlendMode {
-  /**
-   * Edits or paints only on the transparent part of a layer. Works only in layers in which transparent pixels locked = false and is analogous to painting on the back of transparent areas on a sheet of acetate.
-   */
-  BEHIND = 24,
-
-  /**
-   * Edits or paints each pixel and makes it transparent. Works only in layers in which transparent pixels locked = false.
-   */
-  CLEAR = 25,
-
-  /**
-   * Creates a result color with the luminance of the base color and the hue and saturation of the blend color. This preserves the gray levels in the image and is useful for coloring monochrome images and for tinting color images.
-   */
-  COLOR = 22,
-
-  /**
-   * Looks at the color information in each channel and darkens the base color to reflect the blend color by increasing the contrast. Blending with white produces no change.
-   */
-  COLORBURN = 6,
-
-  /**
-   * Looks at the color information in each channel and brightens the base color to reflect the blend color by decreasing the contrast. Blending with black produces no change.
-   */
-  COLORDODGE = 10,
-
-  /**
-   * Looks at the color information in each channel and selects the base or blend color—whichever is darker—as the result color. Pixels lighter than the blend color are replaced, and pixels darker than the blend color do not change.
-   */
-  DARKEN = 4,
-
-  /**
-   *
-   */
-  DARKERCOLOR = 28,
-
-  /**
-   * Looks at the color information in each channel and subtracts either the blend color from the base color or the base color from the blend color, depending on which has the greater brightness value. Blending with white inverts the base color values; blending with black produces no change.
-   */
-  DIFFERENCE = 18,
-
-  /**
-   * Edits or paints each pixel to make it the result color, which is a random replacement of the pixels with the base color or the blend color, depending on the opacity at any pixel location.
-   */
-  DISSOLVE = 3,
-
-  /**
-   *
-   */
-  DIVIDE = 30,
-
-  /**
-   * Creates an effect similar to but lower in contrast than the Difference mode. Blending with white inverts the base color values. Blending with black produces no change.
-   */
-  EXCLUSION = 19,
-
-  /**
-   * Multiplies or screens the colors, depending on the blend color. The effect is similar to shining a harsh spotlight on the image. If the blend color (light source) is lighter than 50% gray, the image is lightened, as if it were screened. This is useful for adding highlights to an image. If the blend color is darker than 50% gray, the image is darkened, as if it were multiplied. This is useful for adding shadows to an image. Painting with pure black or white results in pure black or white.
-   */
-  HARDLIGHT = 14,
-
-  /**
-   * Lighter colors lighten the result, and darker colors darken the result. 50% gray as a blend color has no effect on the result color. Lowering the fill opacity creates less posterization/thresholding.
-   */
-  HARDMIX = 26,
-
-  /**
-   * Creates a result color with the luminance and saturation of the base color and the hue of the blend color.
-   */
-  HUE = 20,
-
-  /**
-   * Looks at the color information in each channel and selects the base or blend color—whichever is lighter—as the result color. Pixels darker than the blend color are replaced, and pixels lighter than the blend color do not change.
-   */
-  LIGHTEN = 8,
-
-  /**
-   *
-   */
-  LIGHTERCOLOR = 27,
-
-  /**
-   * Looks at the color information in each channel and darkens the base color to reflect the blend color by decreasing the brightness. Blending with white produces no change.
-   */
-  LINEARBURN = 7,
-
-  /**
-   * Looks at the color information in each channel and brightens the base color to reflect the blend color by increasing the brightness. Blending with black produces no change.
-   */
-  LINEARDODGE = 11,
-
-  /**
-   * Burns or dodges the colors by decreasing or increasing the brightness, depending on the blend color. If the blend color (light source) is lighter than 50% gray, the image is lightened by increasing the brightness. If the blend color is darker than 50% gray, the image is darkened by decreasing the brightness.
-   */
-  LINEARLIGHT = 16,
-
-  /**
-   * Creates a result color with the hue and saturation of the base color and the luminance of the blend color. This mode creates an inverse effect from that of the Color mode.
-   */
-  LUMINOSITY = 23,
-
-  /**
-   * Looks at the color information in each channel and multiplies the base color by the blend color. The result color is always a darker color. Multiplying any color with black produces black. Multiplying any color with white leaves the color unchanged. When you’re painting with a color other than black or white, successive strokes with a painting tool produce progressively darker colors. The effect is similar to drawing on the image with multiple marking pens.
-   */
-  MULTIPLY = 5,
-
-  /**
-   * Edits or paints each pixel to make it the result color. (Called "Threshold" when you’re working with a bitmapped or indexed-color image.)
-   */
-  NORMAL = 2,
-
-  /**
-   * Multiplies or screens the colors, depending on the base color. Patterns or colors overlay the existing pixels while preserving the highlights and shadows of the base color. The base color is not replaced but is mixed with the blend color to reflect the lightness or darkness of the original color.
-   */
-  OVERLAY = 12,
-
-  /**
-   * Replaces the colors, depending on the blend color. If the blend color (light source) is lighter than 50% gray, pixels darker than the blend color are replaced, and pixels lighter than the blend color do not change. If the blend color is darker than 50% gray, pixels lighter than the blend color are replaced, and pixels darker than the blend color do not change. This is useful for adding special effects to an image.
-   */
-  PINLIGHT = 17,
-
-  /**
-   * Creates a result color with the luminance and hue of the base color and the saturation of the blend color. Painting with this mode in an area with no (0) saturation (gray) causes no change.
-   */
-  SATURATION = 21,
-
-  /**
-   * Looks at each channel’s color information and multiplies the inverse of the blend and base colors. The result color is always a lighter color. Screening with black leaves the color unchanged. Screening with white produces white. The effect is similar to projecting multiple photographic slides on top of each other.
-   */
-  SCREEN = 9,
-
-  /**
-   * Darkens or lightens the colors, depending on the blend color. The effect is similar to shining a diffused spotlight on the image. If the blend color (light source) is lighter than 50% gray, the image is lightened as if it were dodged. If the blend color is darker than 50% gray, the image is darkened as if it were burned in. Painting with pure black or white produces a distinctly darker or lighter area but does not result in pure black or white.
-   */
-  SOFTLIGHT = 13,
-
-  /**
-   *
-   */
-  SUBTRACT = 29,
-
-  /**
-   * Burns or dodges the colors by increasing or decreasing the contrast, depending on the blend color. If the blend color (light source) is lighter than 50% gray, the image is lightened by decreasing the contrast. If the blend color is darker than 50% gray, the image is darkened by increasing the contrast.
-   */
-  VIVIDLIGHT = 15,
-}
-
-/**
- * The type of the layer content to rasterize.
- */
-type RasterizeType {
-  /**
-   * Rasterizes all vector data on the layer.
-   */
-  ENTIRELAYER = 5,
-
-  /**
-   * Rasterizes the fill of a shape layer, leaving the vector mask.
-   */
-  FILLCONTENT = 3,
-
-  /**
-   * Rasterizes the vector mask of a shape layer, turning it into a layer mask.
-   */
-  LAYERCLIPPINGPATH = 4,
-
-  /**
-   * Rasterizes the selected layers.
-   */
-  LINKEDLAYERS = 6,
-
-  /**
-   * Rasterizes a shape layer.
-   */
-  SHAPE = 2,
-
-  /**
-   * Rasterizes the type on a type layer. Doesn't rasterize any other vector data on the layer.
-   */
-  TEXTCONTENTS = 1,
-}
-
-/**
- * The placement of paragraph text within the bounding box.
- */
-type Justification {
-  /**
-   * Text is centered on each line.
-   */
-  CENTER = 2,
-
-  /**
-   * Justifies all lines except the last, which is center-aligned.
-   */
-  CENTERJUSTIFIED = 5,
-
-  /**
-   * Justifies all lines including the last, which is force-justified.
-   */
-  FULLYJUSTIFIED = 7,
-
-  /**
-   * Aligns the left edges, leaving the right edge ragged.
-   */
-  LEFT = 1,
-
-  /**
-   * Justifies all lines except the last, which is left-aligned.
-   */
-  LEFTJUSTIFIED = 4,
-
-  /**
-   * Aligns the right edges, leaving the left edge ragged.
-   */
-  RIGHT = 3,
-
-  /**
-   * Justifies all lines except the last, which is right-aligned.
-   */
-  RIGHTJUSTIFIED = 6,
-}
-
-/**
- * The method to use to smooth edges by softening the color transition between edge pixels and background pixels.
- */
-type AntiAlias {
-  /**
-   * Makes type appear somewhat sharp.
-   */
-  CRISP = 3,
-
-  /**
-   * Does not use anti-aliasing.
-   */
-  NONE = 1,
-
-  /**
-   * Makes type appear its sharpest.
-   */
-  SHARP = 2,
-
-  /**
-   * Makes type appear smoother.
-   */
-  SMOOTH = 5,
-
-  /**
-   * Makes type appear heavier.
-   */
-  STRONG = 4,
-}
-
-/**
- * The capitalization to use.
- */
-type Case {
-  /**
-   * Uses all uppercase letters.
-   */
-  ALLCAPS = 2,
-
-  /**
-   * Uses uppercase and lowercase letters.
-   */
-  NORMAL = 1,
-
-  /**
-   * Uses small caps for lowercase letters.
-   */
-  SMALLCAPS = 3,
-}
-
-/**
- * The language to use.
- */
-type Language {
-  /**
-   * Brazillian Portuguese.
-   */
-  BRAZILLIANPORTUGUESE = 13,
-
-  /**
-   * Canadian French.
-   */
-  CANADIANFRENCH = 4,
-
-  /**
-   * Danish.
-   */
-  DANISH = 17,
-
-  /**
-   * Dutch.
-   */
-  DUTCH = 16,
-
-  /**
-   * British English.
-   */
-  ENGLISHUK = 2,
-
-  /**
-   * American English.
-   */
-  ENGLISHUSA = 1,
-
-  /**
-   * Finnish.
-   */
-  FINNISH = 5,
-
-  /**
-   * French.
-   */
-  FRENCH = 3,
-
-  /**
-   * German.
-   */
-  GERMAN = 6,
-
-  /**
-   * Italian.
-   */
-  ITALIAN = 9,
-
-  /**
-   * Norwegian.
-   */
-  NORWEGIAN = 10,
-
-  /**
-   * Nynorsk Norwegian.
-   */
-  NYNORSKNORWEGIAN = 11,
-
-  /**
-   * Old German.
-   */
-  OLDGERMAN = 7,
-
-  /**
-   * Portuguese.
-   */
-  PORTUGUESE = 12,
-
-  /**
-   * Spanish.
-   */
-  SPANISH = 14,
-
-  /**
-   * Swedish.
-   */
-  SWEDISH = 15,
-
-  /**
-   * Swiss German.
-   */
-  SWISSGERMAN = 8,
-}
-
-/**
- * The type of text.
- */
-type TextType {
-  /**
-   * Text that wraps within a bounding box.
-   */
-  PARAGRAPHTEXT = 2,
-
-  /**
-   * Text that does not wrap.
-   */
-  POINTTEXT = 1,
-}
-
-/**
- * The warp style for text.
- */
-type WarpStyle {
-  /**
-   * The type is warped in the shape of an arc.
-   */
-  ARC = 2,
-
-  /**
-   * Text is warped in the form of an arch.
-   */
-  ARCH = 5,
-
-  /**
-   * Warp is heavier on the lower or left edge of the text than on the upper or right edge.
-   */
-  ARCLOWER = 3,
-
-  /**
-   * Warp is heavier on the upper or right edge of the text than on the lower or left edge.
-   */
-  ARCUPPER = 4,
-
-  /**
-   * Text is warped outward on both the upper and lower or right and left edges.
-   */
-  BULGE = 6,
-
-  /**
-   * Text is warped in the shape of a fish.
-   */
-  FISH = 11,
-
-  /**
-   * Text bulges in the middle and is squeezed on the edges as if viewed through a fisheye lens.
-   */
-  FISHEYE = 13,
-
-  /**
-   * Text is warped in the shape of a waving flag.
-   */
-  FLAG = 9,
-
-  /**
-   * Text is inflated.
-   */
-  INFLATE = 14,
-
-  /**
-   * No warp.
-   */
-  NONE = 1,
-
-  /**
-   * Text is warped in an undulating, rising pattern.
-   */
-  RISE = 12,
-
-  /**
-   * Text is warped downward or to the right in the shape of a fan-like seashell.
-   */
-  SHELLLOWER = 7,
-
-  /**
-   * Text is warped upward or to the left in the shape of a fan-like seashell.
-   */
-  SHELLUPPER = 8,
-
-  /**
-   * Text is squeezed.
-   */
-  SQUEEZE = 15,
-
-  /**
-   * Text is twisted.
-   */
-  TWIST = 16,
-
-  /**
-   * Text is warped in the shape of a wave.
-   */
-  WAVE = 10,
-}
-
-/**
- * The text composer.
- */
-type TextComposer {
-  /**
-   * Considers a network of break points for a range of lines and thus optimizes earlier lines in the paragraph to eliminate especially unattractive breaks later on. Results in more even spacing and fewer hyphens.
-   * The Adobe Every-line composer approaches composition by identifying possible breakpoints, evaluating them, and assigning a weighted penalty based on these principles: Highest importance is given to evenness of letter and word spacing; Possible breakpoints are evaluated and penalized according to how much they deviate from optimal spacing; Hyphenation is avoided when possible; Breakpoints that require hyphenation are penalized more than those that create uneven spacing; Good breakpoints are preferred over bad breakpoints.
-   */
-  ADOBEEVERYLINE = 2,
-
-  /**
-   * Offers a traditional approach to composing type one line at a time. Useful if you prefer to have manual control over how lines break.
-   * Uses the following principles when considering a breakpoint: Compressed or expanded word spacing is preferable to hyphenation; Hyphenation is preferable to compressed or expanded letter spacing; If spacing must be adjusted, compression is better than expansion.
-   */
-  ADOBESINGLELINE = 1,
-}
-
-/**
- * The type of kerning to use for characters.
- */
-type AutoKernType {
-  /**
-   * Allows manual kerning.
-   */
-  MANUAL = 1,
-
-  /**
-   * Uses kern pairs, which contain information about the spacing of specific pairs of letters.
-   */
-  METRICS = 2,
-
-  /**
-   * Adjusts the spacing between adjacent characters based on their shapes.
-   */
-  OPTICAL = 3,
-}
-
-/**
- * The strikethrough style.
- */
-type StrikeThruType {
-  /**
-   * (For vertical type) The strikethrough is through the em box.
-   */
-  STRIKEBOX = 3,
-
-  /**
-   * (For vertical type) The strikethrough is through the height of the text.
-   */
-  STRIKEHEIGHT = 2,
-
-  /**
-   * No strikethrough.
-   */
-  STRIKEOFF = 1,
-}
-
-/**
- * The type of underline.
- */
-type UnderlineType {
-  /**
-   * (For vertical type) The underline is to the left of the text.
-   */
-  UNDERLINELEFT = 3,
-
-  /**
-   * No underline.
-   */
-  UNDERLINEOFF = 1,
-
-  /**
-   * (For vertical type) The underline is to the right of the text.
-   */
-  UNDERLINERIGHT = 2,
-}
-
-/**
- * The selection behavior when a selection already exists.
- */
-type SelectionType {
-  /**
-   * Remove the selection from the already selected area.
-   */
-  DIMINISH = 3,
-
-  /**
-   * Add the selection to an already selected area.
-   */
-  EXTEND = 2,
-
-  /**
-   * Make the selection only the area where the new selection intersects the already selected area.
-   */
-  INTERSECT = 4,
-
-  /**
-   * Replace the selected area.
-   */
-  REPLACE = 1,
-}
-
-/**
- * The export options to use.
- */
-type ExportType {
-  /**
-   * Exports Photoshop paths as Adobe Illustrator files.
-   */
-  ILLUSTRATORPATHS = 1,
-
-  /**
-   * Uses the save for web export options.
-   */
-  SAVEFORWEB = 2,
-}
-
-/**
- * The paths to export.
- */
-type IllustratorPathType {
-  /**
-   * Exports all paths.
-   */
-  ALLPATHS = 2,
-
-  /**
-   * Exports the document bounds.
-   */
-  DOCUMENTBOUNDS = 1,
-
-  /**
-   * Exports the specified path. To specify the path, see the path name property of the illustrator export options object.
-   */
-  NAMEDPATH = 3,
-}
-
-/**
- * The type of channel.
- */
-type ChannelType {
-  /**
-   * The channel related to the document color model.
-   */
-  COMPONENT = 1,
-
-  /**
-   * The apha channel where color indicates a masked area.
-   */
-  MASKEDAREA = 2,
-
-  /**
-   * The lpha channel where color indicates a selected area.
-   */
-  SELECTEDAREA = 3,
-
-  /**
-   * The alpha channel to store a spot color.
-   */
-  SPOTCOLOR = 4,
-}
-
-/**
- * The blur method to use.
- */
-type RadialBlurMethod {
-  /**
-   * Blurs along concentric circular lines at the specified degree of rotation.
-   */
-  SPIN = 1,
-
-  /**
-   * Blurs along radial lines, as if zooming into or out of the image.
-   */
-  ZOOM = 2,
-}
-
-/**
- * The radial blur quality.
- */
-type RadialBlurQuality {
-  /**
-   * Produces best results.
-   */
-  BEST = 3,
-
-  /**
-   * Produces fast but grainy results.
-   */
-  DRAFT = 1,
-
-  /**
-   * Produces good results.
-   */
-  GOOD = 2,
-}
-
-/**
- * The smart blur quality.
- */
-type SmartBlurQuality {
-  /**
-   * High quality.
-   */
-  HIGH = 3,
-
-  /**
-   * Low quality.
-   */
-  LOW = 1,
-
-  /**
-   * Medium quality.
-   */
-  MEDIUM = 2,
-}
-
-/**
- * The method to use for smart blurring.
- */
-type SmartBlurMode {
-  /**
-   * Blur is applied only to edges of color transitions.
-   * Where significant contrast occurs, applies black-and-white edges.
-   */
-  EDGEONLY = 2,
-
-  /**
-   * Blur is applied to entire image.
-   */
-  NORMAL = 1,
-
-  /**
-   * Blur is applied only to edges of color transitions.
-   * Where significant contrast occurs, applies white edges.
-   */
-  OVERLAYEDGE = 3,
-}
-
-/**
- * The type of texture or glass surface image to load for a texturizer or glass filter.
- */
-type TextureType {
-  /**
-   * The image appears as if viewed through glass blocks.
-   */
-  BLOCKS = 1,
-
-  /**
-   * The image appears as if painted on canvas.
-   */
-  CANVAS = 2,
-
-  /**
-   * Texture from an existing document.
-   */
-  FILE = 5,
-
-  /**
-   * The image appears as if frosted.
-   */
+type ColorBlendMode* {.pure.} = enum
+  NORMAL = 2
+  DISSOLVE = 3
+  DARKEN = 4
+  MULTIPLY = 5
+  COLORBURN = 6
+  LINEARBURN = 7
+  LIGHTEN = 8
+  SCREEN = 9
+  COLORDODGE = 10
+  LINEARDODGE = 11
+  OVERLAY = 12
+  SOFTLIGHT = 13
+  HARDLIGHT = 14
+  VIVIDLIGHT = 15
+  LINEARLIGHT = 16
+  PINLIGHT = 17
+  DIFFERENCE = 18
+  EXCLUSION = 19
+  HUE = 20
+  SATURATION = 21
+  COLOR = 22
+  LUMINOSITY = 23
+  BEHIND = 24
+  CLEAR = 25
+  HARDMIX = 26
+  LIGHTERCOLOR = 27
+  DARKERCOLOR = 28
+  SUBTRACT = 29
+  DIVIDE = 30
+
+
+type RasterizeType* {.pure.} = enum
+  TEXTCONTENTS = 1
+  SHAPE = 2
+  FILLCONTENT = 3
+  LAYERCLIPPINGPATH = 4
+  ENTIRELAYER = 5
+  LINKEDLAYERS = 6
+
+
+type Justification* {.pure.} = enum
+  LEFT = 1
+  CENTER = 2
+  RIGHT = 3
+  LEFTJUSTIFIED = 4
+  CENTERJUSTIFIED = 5
+  RIGHTJUSTIFIED = 6
+  FULLYJUSTIFIED = 7
+
+
+type AntiAlias* {.pure.} = enum
+  NONE = 1
+  SHARP = 2
+  CRISP = 3
+  STRONG = 4
+  SMOOTH = 5
+
+
+type Case* {.pure.} = enum
+  NORMAL = 1
+  ALLCAPS = 2
+  SMALLCAPS = 3
+
+
+type Language* {.pure.} = enum
+  ENGLISHUSA = 1
+  ENGLISHUK = 2
+  FRENCH = 3
+  CANADIANFRENCH = 4
+  FINNISH = 5
+  GERMAN = 6
+  OLDGERMAN = 7
+  SWISSGERMAN = 8
+  ITALIAN = 9
+  NORWEGIAN = 10
+  NYNORSKNORWEGIAN = 11
+  PORTUGUESE = 12
+  BRAZILLIANPORTUGUESE = 13
+  SPANISH = 14
+  SWEDISH = 15
+  DUTCH = 16
+  DANISH = 17
+
+
+type TextType* {.pure.} = enum
+  POINTTEXT = 1
+  PARAGRAPHTEXT = 2
+
+
+type WarpStyle* {.pure.} = enum
+  NONE = 1
+  ARC = 2
+  ARCLOWER = 3
+  ARCUPPER = 4
+  ARCH = 5
+  BULGE = 6
+  SHELLLOWER = 7
+  SHELLUPPER = 8
+  FLAG = 9
+  WAVE = 10
+  FISH = 11
+  RISE = 12
+  FISHEYE = 13
+  INFLATE = 14
+  SQUEEZE = 15
+  TWIST = 16
+
+
+type TextComposer* {.pure.} = enum
+  ADOBESINGLELINE = 1
+  ADOBEEVERYLINE = 2
+
+
+type AutoKernType* {.pure.} = enum
+  MANUAL = 1
+  METRICS = 2
+  OPTICAL = 3
+
+
+type StrikeThruType* {.pure.} = enum
+  STRIKEOFF = 1
+  STRIKEHEIGHT = 2
+  STRIKEBOX = 3
+
+
+type UnderlineType* {.pure.} = enum
+  UNDERLINEOFF = 1
+  UNDERLINERIGHT = 2
+  UNDERLINELEFT = 3
+
+
+type SelectionType* {.pure.} = enum 
+  REPLACE = 1
+  EXTEND = 2
+  DIMINISH = 3
+  INTERSECT = 4
+
+
+type ExportType* {.pure.} = enum
+  ILLUSTRATORPATHS = 1
+  SAVEFORWEB = 2
+
+
+type IllustratorPathType* {.pure.} = enum
+  DOCUMENTBOUNDS = 1
+  ALLPATHS = 2
+  NAMEDPATH = 3
+
+
+type ChannelType* {.pure.} = enum
+  COMPONENT = 1
+  MASKEDAREA = 2
+  SELECTEDAREA = 3
+  SPOTCOLOR = 4
+
+
+type RadialBlurMethod* {.pure.} = enum
+  SPIN = 1
+  ZOOM = 2
+
+
+type RadialBlurQuality* {.pure.} = enum
+  DRAFT = 1
+  GOOD = 2
+  BEST = 3
+
+
+type SmartBlurQuality* {.pure.} = enum
+  LOW = 1
+  MEDIUM = 2
+  HIGH = 3
+
+
+type SmartBlurMode* {.pure.} = enum
+  NORMAL = 1
+  EDGEONLY = 2
+  OVERLAYEDGE = 3
+
+
+type TextureType* {.pure.} = enum
+  BLOCKS = 1
+  CANVAS = 2
   FROSTED = 3,
+  TINYLENS = 4
+  FILE = 5
 
-  /**
-   * The image appears as if viewed through an array of tiny lenses.
-   */
-  TINYLENS = 4,
-}
-
-/**
- * The method of polar distortion to use.
- */
-type PolarConversionType {
-  /**
-   * The selection is converted from its polar to rectangular coordinates.
-   */
-  POLARTORECTANGULAR = 2,
-
-  /**
-   * The selection is converted from its rectangular to polar coordinates.
-   */
-  RECTANGULARTOPOLAR = 1,
-}
-
-/**
- * The size of undulations.
- */
-type RippleSize {
-  /**
-   * Large.
-   */
-  LARGE = 3,
-
-  /**
-   * Medium.
-   */
-  MEDIUM = 2,
-
-  /**
-   * Small.
-   */
-  SMALL = 1,
-}
-
-/**
- * The method to use to treat undistorted areas or areas left blank in an image to which a filter in the Distort category has been applied.
- */
-type UndefinedAreas {
-  /**
-   * Extends the colors of pixels along the edge of the image in the direction specified. Banding may result if the edge pixels are different colors.
-   */
-  REPEATEDGEPIXELS = 2,
-
-  /**
-   * Fills the undefined space with content from the opposite edge of the image.
-   */
-  WRAPAROUND = 1,
-}
-
-/**
- * The method to use to fill the empty space left by offsetting a an image or selection.
- */
-type OffsetUndefinedAreas {
-  /**
-   * Extends the colors of pixels along the edge of the image in the direction specified. Banding may result if the edge pixels are different colors.
-   */
-  REPEATEDGEPIXELS = 3,
-
-  /**
-   * For background layers, sets pixels to the background layer color. For nonbackground layers, sets the pixels to transparent.
-   */
-  SETTOBACKGROUND = 1,
-
-  /**
-   * Fills the undefined space with content from the opposite edge of the image.
-   */
-  WRAPAROUND = 2,
-}
-
-/**
- * The curve (or stretch shape) to use for the distortion.
- */
-type SpherizeMode {
-  /**
-   * Distorts the image as if it is wrapped around a horizontal cylinder.
-   */
-  HORIZONTAL = 2,
-
-  /**
-   * Distorts the image as if it is wrapped around a sphere.
-   */
-  NORMAL = 1,
-
-  /**
-   * Distorts the image as if it is wrapped around a vertical cylinder.
-   */
-  VERTICAL = 3,
-}
-
-/**
- * Describes how the displacement map fits the image if the image is not the same size as the map.
- */
-type DisplacementMapType {
-  /**
-   * The map is resized.
-   */
-  STRETCHTOFIT = 1,
-
-  /**
-   * The selection is filled by repeating the map in a pattern.
-   */
-  TILE = 2,
-}
-
-/**
- * The type of wave.
- */
-type WaveType {
-  /**
-   * Rolling.
-   */
-  SINE = 1,
-
-  /**
-   * Square.
-   */
-  SQUARE = 3,
-
-  /**
-   * Triangular.
-   */
-  TRIANGULAR = 2,
-}
-
-/**
- * The method of zigzagging.
- */
-type ZigZagType {
-  /**
-   * Pixels are rotated around the center of the selection.
-   */
-  AROUNDCENTER = 1,
-
-  /**
-   * Pixels are displaced toward or away from the center of the selection.
-   */
-  OUTFROMCENTER = 2,
-
-  /**
-   * Pixels are displaced to the upper left or lower right.
-   */
-  PONDRIPPLES = 3,
-}
-
-/**
- * The distribution method to use when applying an Add Noise filter.
- */
-type NoiseDistribution {
-  /**
-   * Distributes color values of noise along a bell-shaped curve, creating a speckled effect.
-   */
-  GAUSSIAN = 2,
-
-  /**
-   * Distributes color values of noise using random numbers between 0 and plus or minus the specified value, creating a subtle effect.
-   */
-  UNIFORM = 1,
-}
-
-/**
- * The type of lens.
- */
-type LensType {
-  /**
-   * Movie Prime.
-   */
-  MOVIEPRIME = 5,
-
-  /**
-   * 105mm Prime.
-   */
-  PRIME105 = 3,
-
-  /**
-   * 35mm Prime.
-   */
-  PRIME35 = 2,
-
-  /**
-   * 50-300mm Zoom.
-   */
-  ZOOMLENS = 1,
-}
-
-/**
- * The type of fields to eliminate.
- */
-type EliminateFields {
-  /**
-   * Eliminate even interlaced lines in a video image.
-   */
-  EVENFIELDS = 2,
-
-  /**
-   * Eliminate odd interlaced lines in a video image.
-   */
-  ODDFIELDS = 1,
-}
-
-/**
- * The method for replacing eliminated fields.
- */
-type CreateFields {
-  /**
-   * Duplicates existing pixels.
-   */
-  DUPLICATION = 1,
-
-  /**
-   * Assigns color values to any new pixels that Photoshop creates based on the color values of existing pixels in the image.
-   */
-  INTERPOLATION = 2,
-}
-
-/**
- * The pixel dimensions of the image.
- */
-type PhotoCDSize {
-  /**
-   * 1024x1536 image.
-   */
-  EXTRALARGE = 5,
-
-  /**
-   * 512x768 image.
-   */
-  LARGE = 4,
-
-  /**
-   * 2048x3072 image.
-   */
-  MAXIMUM = 6,
-
-  /**
-   * 256x384 image.
-   */
-  MEDIUM = 3,
-
-  /**
-   * 64x96 image.
-   */
-  MINIMUM = 1,
-
-  /**
-   * 128x192 image.
-   */
-  SMALL = 2,
-}
-
-/**
- * The number of bits per color channel.
- */
-type BitsPerChannelType {
-  /**
-   * 8 bits per channel.
-   */
-  EIGHT = 8,
-
-  /**
-   * 1 bit per channel.
-   */
-  ONE = 1,
-
-  /**
-   * 16 bits per channel.
-   */
-  SIXTEEN = 16,
-
-  /**
-   * 32 bits per channel.
-   */
-  THIRTYTWO = 32,
-}
-
-/**
- * The number of bits per pixel to use when compressing a PICT file.
- */
-type PICTBitsPerPixels {
-  /**
-   * 8 bits per pixel.
-   */
-  EIGHT = 8,
-
-  /**
-   * 4 bits per pixel.
-   */
-  FOUR = 4,
-
-  /**
-   * 16 bits per pixel.
-   */
-  SIXTEEN = 16,
-
-  /**
-   * 32 bits per pixel.
-   */
-  THIRTYTWO = 32,
-
-  /**
-   * 2 bits per pixel.
-   */
-  TWO = 2,
-}
-
-/**
- * The resolution to use when saving an image in Targa format.
- */
-type TargaBitsPerPixels {
-  /**
-   * 16 bits per pixel.
-   */
-  SIXTEEN = 16,
-
-  /**
-   * 32 bits per pixel.
-   */
-  THIRTYTWO = 32,
-
-  /**
-   * 24 bits per pixel.
-   */
-  TWENTYFOUR = 24,
-}
-
-/**
- * The value type of an object.
- */
-type DescValueType {
-  /**
-   * Alias.
-   */
-  ALIASTYPE = 11,
-
-  /**
-   * Boolean.
-   */
-  BOOLEANTYPE = 5,
-
-  /**
-   * Class.
-   */
-  CLASSTYPE = 10,
-
-  /**
-   * Double.
-   */
-  DOUBLETYPE = 2,
-
-  /**
-   * Enumeration.
-   */
-  ENUMERATEDTYPE = 8,
-
-  /**
-   * Integer.
-   */
-  INTEGERTYPE = 1,
-
-  /**
-   *
-   */
-  LARGEINTEGERTYPE = 13,
-
-  /**
-   * Action list.
-   */
-  LISTTYPE = 6,
-
-  /**
-   * Object.
-   */
-  OBJECTTYPE = 7,
-
-  /**
-   * Raw.
-   */
-  RAWTYPE = 12,
-
-  /**
-   * Reference.
-   */
-  REFERENCETYPE = 9,
-
-  /**
-   * String.
-   */
-  STRINGTYPE = 4,
-
-  /**
-   * Unit value of type double.
-   */
-  UNITDOUBLE = 3,
-}
-
-/**
- * The type of action reference object.
- */
-type ReferenceFormType {
-  /**
-   * Class.
-   */
-  CLASSTYPE = 7,
-
-  /**
-   * Enumerated.
-   */
-  ENUMERATED = 5,
-
-  /**
-   * Identifier.
-   */
-  IDENTIFIER = 3,
-
-  /**
-   * Index.
-   */
-  INDEX = 2,
-
-  /**
-   * Name.
-   */
-  NAME = 1,
-
-  /**
-   * Offset.
-   */
-  OFFSET = 4,
-
-  /**
-   * Property.
-   */
-  PROPERTY = 6,
-}
-
-/**
- * The number of bits per channel (also called pixel depth or color depth). The number selected indicates the exponent of 2. For example, a pixel with a bit-depth of EIGHT has 2-to-the-8th, or 256, possible color values.
- */
-type BMPDepthType {
-  /**
-   * A1 R5 G5 B5 advanced bit depth specification.
-   */
-  BMP_A1R5G5B5 = 61,
-
-  /**
-   * A4 R4 G4 B4 advanced bit depth specification.
-   */
-  BMP_A4R4G4B4 = 64,
-
-  /**
-   * A8 R8 G8 B8 advanced bit depth specification (same as normal 32 bit mode)
-   */
-  BMP_A8R8G8B8 = 67,
-
-  /**
-   * R5 G6 B5 advanced bit depth specification.
-   */
-  BMP_R5G6B5 = 62,
-
-  /**
-   * R8 G8 B8 advanced bit depth specification (same as normal 24 bit mode)
-   */
-  BMP_R8G8B8 = 65,
-
-  /**
-   * X1 R5 G5 B5 advanced bit depth specification (same as normal 16 bit mode)
-   */
-  BMP_X1R5G5B5 = 60,
-
-  /**
-   * X4 R4 G4 B4 advanced bit depth specification.
-   */
-  BMP_X4R4G4B4 = 63,
-
-  /**
-   * X8 R8 G8 B8 advanced bit depth specification.
-   */
-  BMP_X8R8G8B8 = 66,
-
-  /**
-   * 8 bits depth.
-   */
-  EIGHT = 8,
-
-  /**
-   * 4 bits depth.
-   */
-  FOUR = 4,
-
-  /**
-   * 1 bit depth.
-   */
-  ONE = 1,
-
-  /**
-   * 16 bits depth.
-   */
-  SIXTEEN = 16,
-
-  /**
-   * 32 bits depth.
-   */
-  THIRTYTWO = 32,
-
-  /**
-   * 24 bits depth.
-   */
-  TWENTYFOUR = 24,
-}
-
-/**
- * The copyright status of the document.
- */
-type CopyrightedType {
-  /**
-   * The document is copyrighted.
-   */
-  COPYRIGHTEDWORK = 1,
-
-  /**
-   * The document is in the public domain.
-   */
-  PUBLICDOMAIN = 2,
-
-  /**
-   * The copyright status is not indicated.
-   */
-  UNMARKED = 3,
-}
-
-/**
- * The quality of an image converted to bitmap mode.
- */
-type BitmapConversionType {
-  /**
-   * Simulates the effect of printing a grayscale image through a custom halftone screen. This method lets you apply a screen texture, such as a wood grain, to an image. To use this option, you must first define a pattern.
-   */
-  CUSTOMPATTERN = 5,
-
-  /**
-   * Applies a random pattern that is usually less noticeable than pattern dither. The dither effects are diffused across adjacent pixels. If you select this algorithm, specify a dither percentage to control the amount of dithering applied to the image.
-   * May cause detectable seams to appear across slice boundaries. Linking slices diffuses the dither pattern across all linked slices, and eliminates the seams.
-   */
-  DIFFUSIONDITHER = 3,
-
-  /**
-   * 50% Threshold.
-   */
-  HALFTHRESHOLD = 1,
-
-  /**
-   * Lets you convert a grayscale image to simulated halftone dots.
-   */
-  HALFTONESCREEN = 4,
-
-  /**
-   * Applies a halftone-like square pattern to determine the value of pixels.
-   */
-  PATTERNDITHER = 2,
-}
-
-/**
- * The shape of the dots (ink deposits) in the halftone screen.
- */
-type BitmapHalfToneType {
+
+type PolarConversionType* {.pure.} = enum
+  RECTANGULARTOPOLAR = 1
+  POLARTORECTANGULAR = 2
+
+
+type RippleSize* {.pure.} = enum
+  SMALL = 1
+  MEDIUM = 2
+  LARGE = 3
+
+
+type UndefinedAreas* {.pure.} = enum
+  WRAPAROUND = 1
+  REPEATEDGEPIXELS = 2
+
+
+type OffsetUndefinedAreas* {.pure.} = enum
+  SETTOBACKGROUND = 1
+  WRAPAROUND = 2
+  REPEATEDGEPIXELS = 3
+
+
+type SpherizeMode* {.pure.} = enum
+  NORMAL = 1
+  HORIZONTAL = 2
+  VERTICAL = 3
+
+
+type DisplacementMapType* {.pure.} = enum 
+  STRETCHTOFIT = 1
+  TILE = 2
+
+
+type WaveType* {.pure.} = enum
+  SINE = 1
+  TRIANGULAR = 2
+  SQUARE = 3
+
+
+type ZigZagType* {.pure.} = enum
+  AROUNDCENTER = 1
+  OUTFROMCENTER = 2
+  PONDRIPPLES = 3
+
+
+type NoiseDistribution* {.pure.} = enum
+  UNIFORM = 1
+  GAUSSIAN = 2
+
+
+type LensType* {.pure.} = enum
+  ZOOMLENS = 1
+  PRIME35 = 2
+  PRIME105 = 3
+  MOVIEPRIME = 5
+
+
+type EliminateFields* {.pure.} = enum
+  ODDFIELDS = 1
+  EVENFIELDS = 2
+
+
+type CreateFields* {.pure.} = enum
+  DUPLICATION = 1
+  INTERPOLATION = 2
+
+
+type PhotoCDSize* {.pure.} = enum
+  MINIMUM = 1
+  SMALL = 2
+  MEDIUM = 3
+  LARGE = 4
+  EXTRALARGE = 5
+  MAXIMUM = 6
+
+
+type BitsPerChannelType* {.pure.} = enum
+  ONE = 1
+  EIGHT = 8
+  SIXTEEN = 16
+  THIRTYTWO = 32
+
+
+type PICTBitsPerPixels* {.pure.} = enum
+  TWO = 2
+  FOUR = 4
+  EIGHT = 8
+  SIXTEEN = 16
+  THIRTYTWO = 32
+
+
+type TargaBitsPerPixels* {.pure.} = enum
+  SIXTEEN = 16
+  TWENTYFOUR = 24
+  THIRTYTWO = 32
+
+
+type DescValueType* {.pure.} = enum
+  INTEGERTYPE = 1
+  DOUBLETYPE = 2
+  UNITDOUBLE = 3
+  STRINGTYPE = 4
+  BOOLEANTYPE = 5
+  LISTTYPE = 6
+  OBJECTTYPE = 7
+  ENUMERATEDTYPE = 8
+  REFERENCETYPE = 9
+  CLASSTYPE = 10
+  ALIASTYPE = 11
+  RAWTYPE = 12
+  LARGEINTEGERTYPE = 13
+
+
+type ReferenceFormType* {.pure.} = enum
+  NAME = 1
+  INDEX = 2
+  IDENTIFIER = 3
+  OFFSET = 4
+  ENUMERATED = 5
+  PROPERTY = 6
+  CLASSTYPE = 7
+
+
+type BMPDepthType* {.pure.} = enum
+  ONE = 1
+  FOUR = 4
+  EIGHT = 8
+  SIXTEEN = 16
+  TWENTYFOUR = 24
+  THIRTYTWO = 32
+  BMP_X1R5G5B5 = 60
+  BMP_A1R5G5B5 = 61
+  BMP_R5G6B5 = 62
+  BMP_X4R4G4B4 = 63
+  BMP_A4R4G4B4 = 64
+  BMP_R8G8B8 = 65
+  BMP_X8R8G8B8 = 66
+  BMP_A8R8G8B8 = 67
+
+
+type CopyrightedType* {.pure.} = enum
+  COPYRIGHTEDWORK = 1
+  PUBLICDOMAIN = 2
+  UNMARKED = 3
+
+
+type BitmapConversionType* {.pure.} = enum 
+  HALFTHRESHOLD = 1
+  PATTERNDITHER = 2
+  DIFFUSIONDITHER = 3
+  HALFTONESCREEN = 4
+  CUSTOMPATTERN = 5
+
+
+type BitmapHalfToneType* {.pure.} = enum
   /**
    * Cross.
    */
